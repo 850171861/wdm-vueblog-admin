@@ -2,71 +2,91 @@
   <common-layout>
     <div class="top">
       <div class="header">
-        <img alt="logo"
-             class="logo"
-             src="@/assets/img/logo.png" />
-        <span class="title">{{systemName}}</span>
+        <img alt="logo" class="logo" src="@/assets/img/logo.png" />
+        <span class="title">{{ systemName }}</span>
       </div>
       <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
     </div>
     <div class="login">
-      <a-form @submit="onSubmit"
-              :form="form">
-        <a-tabs size="large"
-                :tabBarStyle="{textAlign: 'center'}"
-                style="padding: 0 2px;">
-          <a-tab-pane tab="账户密码登录"
-                      key="1">
-            <a-alert type="error"
-                     :closable="true"
-                     v-show="error"
-                     :message="error"
-                     showIcon
-                     style="margin-bottom: 24px;" />
+      <a-form @submit="onSubmit" :form="form">
+        <a-tabs
+          size="large"
+          :tabBarStyle="{ textAlign: 'center' }"
+          style="padding: 0 2px"
+        >
+          <a-tab-pane tab="账户密码登录" key="1">
+            <a-alert
+              type="error"
+              :closable="true"
+              v-show="error"
+              :message="error"
+              showIcon
+              style="margin-bottom: 24px"
+            />
             <a-form-item>
-              <a-input autocomplete="autocomplete"
-                       size="large"
-                       placeholder="admin"
-                       v-decorator="['name', {rules: [{ required: true, message: '请输入账户名', whitespace: true}]}]">
-                <a-icon slot="prefix"
-                        type="user" />
+              <a-input
+                autocomplete="autocomplete"
+                size="large"
+                placeholder="admin"
+                v-decorator="[
+                  'name',
+                  {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请输入账户名',
+                        whitespace: true,
+                      },
+                    ],
+                  },
+                ]"
+              >
+                <a-icon slot="prefix" type="user" />
               </a-input>
             </a-form-item>
             <a-form-item>
-              <a-input size="large"
-                       placeholder="888888"
-                       autocomplete="autocomplete"
-                       type="password"
-                       v-decorator="['password', {rules: [{ required: true, message: '请输入密码', whitespace: true}]}]">
-                <a-icon slot="prefix"
-                        type="lock" />
+              <a-input
+                size="large"
+                placeholder="888888"
+                autocomplete="autocomplete"
+                type="password"
+                v-decorator="[
+                  'password',
+                  {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请输入密码',
+                        whitespace: true,
+                      },
+                    ],
+                  },
+                ]"
+              >
+                <a-icon slot="prefix" type="lock" />
               </a-input>
             </a-form-item>
           </a-tab-pane>
-          <a-tab-pane tab="手机号登录"
-                      key="2">
+          <a-tab-pane tab="手机号登录" key="2">
             <a-form-item>
-              <a-input size="large"
-                       placeholder="mobile number">
-                <a-icon slot="prefix"
-                        type="mobile" />
+              <a-input size="large" placeholder="mobile number">
+                <a-icon slot="prefix" type="mobile" />
               </a-input>
             </a-form-item>
             <a-form-item>
-              <a-row :gutter="8"
-                     style="margin: 0 -4px">
+              <a-row :gutter="8" style="margin: 0 -4px">
                 <a-col :span="16">
-                  <a-input size="large"
-                           placeholder="captcha">
-                    <a-icon slot="prefix"
-                            type="mail" />
+                  <a-input size="large" placeholder="captcha">
+                    <a-icon slot="prefix" type="mail" />
                   </a-input>
                 </a-col>
-                <a-col :span="8"
-                       style="padding-left: 4px">
-                  <a-button style="width: 100%"
-                            class="captcha-button"
-                            size="large">获取验证码</a-button>
+                <a-col :span="8" style="padding-left: 4px">
+                  <a-button
+                    style="width: 100%"
+                    class="captcha-button"
+                    size="large"
+                    >获取验证码</a-button
+                  >
                 </a-col>
               </a-row>
             </a-form-item>
@@ -77,22 +97,23 @@
           <a style="float: right">忘记密码</a>
         </div>
         <a-form-item>
-          <a-button :loading="logging"
-                    style="width: 100%;margin-top: 24px"
-                    size="large"
-                    htmlType="submit"
-                    type="primary">登录</a-button>
+          <a-button
+            :loading="logging"
+            style="width: 100%; margin-top: 24px"
+            size="large"
+            htmlType="submit"
+            type="primary"
+            >登录</a-button
+          >
         </a-form-item>
         <div>
           其他登录方式
-          <a-icon class="icon"
-                  type="alipay-circle" />
-          <a-icon class="icon"
-                  type="taobao-circle" />
-          <a-icon class="icon"
-                  type="weibo-circle" />
-          <router-link style="float: right"
-                       to="/dashboard/workplace">注册账户</router-link>
+          <a-icon class="icon" type="alipay-circle" />
+          <a-icon class="icon" type="taobao-circle" />
+          <a-icon class="icon" type="weibo-circle" />
+          <router-link style="float: right" to="/dashboard/workplace"
+            >注册账户</router-link
+          >
         </div>
       </a-form>
     </div>
@@ -100,51 +121,51 @@
 </template>
 
 <script>
-import CommonLayout from '@/layouts/CommonLayout'
-import { login } from '@/services/user'
-import { setAuthorization } from '@/utils/request'
+import CommonLayout from "@/layouts/CommonLayout";
+import { login } from "@/services/user";
+import { setAuthorization } from "@/utils/request";
 // import { loadRoutes } from '@/utils/routerUtil'
-import { mapMutations } from 'vuex'
+import { mapMutations } from "vuex";
 
 export default {
-  name: 'Login',
+  name: "Login",
   components: { CommonLayout },
-  data () {
+  data() {
     return {
       logging: false,
-      error: '',
-      form: this.$form.createForm(this)
-    }
+      error: "",
+      form: this.$form.createForm(this),
+    };
   },
   computed: {
-    systemName () {
-      return this.$store.state.setting.systemName
-    }
+    systemName() {
+      return this.$store.state.setting.systemName;
+    },
   },
   methods: {
-    ...mapMutations('account', ['setUser', 'setPermissions', 'setRoles']),
-    onSubmit (e) {
-      e.preventDefault()
+    ...mapMutations("account", ["setUser", "setPermissions", "setRoles"]),
+    onSubmit(e) {
+      e.preventDefault();
       this.form.validateFields((err) => {
         if (!err) {
-          this.logging = true
-          const username = this.form.getFieldValue('name')
-          const password = this.form.getFieldValue('password')
-          login(username, password).then(this.afterLogin)
+          this.logging = true;
+          const username = this.form.getFieldValue("name");
+          const password = this.form.getFieldValue("password");
+          login(username, password).then(this.afterLogin);
         }
-      })
+      });
     },
-    afterLogin (res) {
-      this.logging = false
-      const loginRes = res.data
+    afterLogin(res) {
+      this.logging = false;
+      const loginRes = res.data;
       if (loginRes.code == 200) {
-        console.log(loginRes)
-        const { user } = loginRes
-        this.setUser(user)
+        console.log(loginRes);
+        const { user } = loginRes;
+        this.setUser(user);
 
-        setAuthorization({ token: "Bearer " + loginRes.token })
+        setAuthorization({ token: loginRes.token });
 
-        this.$router.push('/dashboard/workplace')
+        this.$router.push("/dashboard/workplace");
         // this.setPermissions(permissions)
         // this.setRoles(roles)
         // setAuthorization({ token: loginRes.data.token, expireAt: new Date(loginRes.data.expireAt) })
@@ -156,11 +177,11 @@ export default {
         //   this.$message.success(loginRes.message, 3)
         // })
       } else {
-        this.error = loginRes.message
+        this.error = loginRes.message;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
