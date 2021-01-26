@@ -1,80 +1,89 @@
 <template>
   <div>
-    <a-button type="primary"
-              @click="handleCreate">
+    <a-button type="primary" @click="handleCreate">
       <a-icon type="plus" /> 添加
     </a-button>
-    <a-table bordered
-             :rowKey="
+    <a-table
+      bordered
+      :rowKey="
         (record, index) => {
           return index;
         }
       "
-             :data-source="dataSource"
-             :columns="columns">
-      <template slot="status"
-                slot-scope="text, record">
+      :data-source="dataSource"
+      :columns="columns"
+    >
+      <template slot="status" slot-scope="text, record">
         <span v-if="dataSource.length">
-          <a href="javascript:;"
-             v-if="record.status == 1">
-            <a-button type="dashed"
-                      style="
+          <a href="javascript:;" v-if="record.status == 1">
+            <a-button
+              type="dashed"
+              style="
                 background-color: #e6f9f4;
                 border-color: #ccf3e9;
                 color: #00c292;
-              ">
+              "
+            >
               启用中
             </a-button>
           </a>
 
-          <a href="javascript:;"
-             v-else>
-            <a-button type="dashed"
-                      style="
+          <a href="javascript:;" v-else>
+            <a-button
+              type="dashed"
+              style="
                 background-color: #feeef0;
                 border-color: #fddce2;
                 color: #f4516c;
-              ">
+              "
+            >
               禁用中
             </a-button>
           </a>
         </span>
       </template>
 
-      <template slot="operation"
-                slot-scope="text, record">
-        <a-button type="primary"
-                  style="margin-right: 20px"
-                  @click="handleUpdate(record)">
+      <template slot="operation" slot-scope="text, record">
+        <a-button
+          type="primary"
+          style="margin-right: 20px"
+          @click="handleUpdate(record)"
+        >
           编辑
         </a-button>
-        <a-popconfirm v-if="dataSource.length"
-                      title="确定要删除吗？"
-                      @confirm="() => onDelete(record._id)">
+        <a-popconfirm
+          v-if="dataSource.length"
+          title="确定要删除吗？"
+          @confirm="() => onDelete(record._id)"
+        >
           <a-button type="danger"> 删除 </a-button>
         </a-popconfirm>
       </template>
     </a-table>
 
     <!-- 抽屉 增加数据或者修改数据  页面 -->
-    <a-drawer title="Create a new account"
-              :width="440"
-              :visible="visible"
-              :body-style="{ paddingBottom: '80px' }"
-              @close="onClose">
+    <a-drawer
+      title="Create a new account"
+      :width="440"
+      :visible="visible"
+      :body-style="{ paddingBottom: '80px' }"
+      @close="onClose"
+    >
       <a-form-item label="分类名称">
-        <a-input placeholder="请输入分类名称"
-                 v-model="obj.name" />
+        <a-input placeholder="请输入分类名称" v-model="obj.name" />
       </a-form-item>
       <a-form-item label="状态">
-        <a-switch defaultChecked
-                  checkedChildren="启动中"
-                  unCheckedChildren="禁用中"
-                  v-model="checked"
-                  @change="onChange" />
+        <a-switch
+          defaultChecked
+          checkedChildren="启动中"
+          unCheckedChildren="禁用中"
+          v-model="checked"
+          @change="onChange"
+        />
       </a-form-item>
 
-      <div :style="{
+      <div
+        :style="{
           position: 'absolute',
           right: 0,
           bottom: 0,
@@ -84,13 +93,15 @@
           background: '#fff',
           textAlign: 'right',
           zIndex: 1,
-        }">
-        <a-button :style="{ marginRight: '8px' }"
-                  @click="onClose">
+        }"
+      >
+        <a-button :style="{ marginRight: '8px' }" @click="onClose">
           取消
         </a-button>
-        <a-button type="primary"
-                  @click="dialogStatus === 'create' ? createData() : updateData()">
+        <a-button
+          type="primary"
+          @click="dialogStatus === 'create' ? createData() : updateData()"
+        >
           确认
         </a-button>
       </div>
@@ -106,7 +117,7 @@ import {
 } from "@/services/category";
 
 export default {
-  data () {
+  data() {
     return {
       obj: {
         name: "",
@@ -147,24 +158,24 @@ export default {
       ],
     };
   },
-  mounted () {
+  mounted() {
     this.getCategoryList();
   },
   methods: {
-    onChange () {
+    onChange() {
       this.checked == true ? (this.obj.status = 1) : (this.obj.status = 0);
     },
-    onClose () {
+    onClose() {
       // 关闭对话框
       this.visible = false;
     },
     //处理创建
-    handleCreate () {
+    handleCreate() {
       this.dialogStatus = "create"; //等于create调用createData()
       this.visible = true; //弹出
     },
     // 创建数据
-    createData () {
+    createData() {
       addCategory(this.obj).then((res) => {
         if (res.data.code === 200) {
           let data = res.data.data;
@@ -173,17 +184,19 @@ export default {
         } else {
           this.$message.success("添加数据失败"); // 提示是否成功
         }
+        this.obj.name = "";
+        this.obj.status = 1; // 初始化obj
       });
       this.visible = false; //关闭对话框
     },
-    handleUpdate (row) {
+    handleUpdate(row) {
       //处理修改
       this.obj = Object.assign({}, row); //复制当前编辑对象
       this.obj.status == 1 ? (this.checked = true) : (this.checked = false); //如果当前状态是启用中则开关-开启
       this.dialogStatus = "update"; //修改值当点击确认调用updateData（）
       this.visible = true; //弹出
     },
-    updateData () {
+    updateData() {
       // 修改数据
       updateCategory(this.obj).then((res) => {
         if (res.data.code === 200) {
@@ -201,13 +214,13 @@ export default {
       });
     },
     // 获取分类列表数据
-    getCategoryList () {
+    getCategoryList() {
       category().then((res) => {
         this.dataSource = res.data.data;
       });
     },
     // 删除数据
-    onDelete (id) {
+    onDelete(id) {
       deleteCategory({ id: id }).then((res) => {
         if (res.data.code === 200) {
           const dataSource = [...this.dataSource];

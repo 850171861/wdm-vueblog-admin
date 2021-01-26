@@ -15,6 +15,9 @@ module.exports = {
   DELETE_TAG: `${BASE_URL}/admin/deleteTag`,
   ADD_TAG: `${BASE_URL}/admin/addTag`,
   UPDATE_TAG: `${BASE_URL}/admin/updateTag`,
+  // 评论管理
+  COMMENT: `${BASE_URL}/api/getComment`,
+  DELETE_COMMENT: `${BASE_URL}/admin/deleteComment`,
   //
   ROUTES: `${BASE_URL}/routes`,
   GOODS: `${BASE_URL}/goods`,

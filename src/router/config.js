@@ -65,6 +65,14 @@ const options = {
       }
     },
     {
+      path: 'comment',
+      name: '评论管理',
+      component: () => import('@/pages/comment'),
+      meta: {
+        icon: 'form'
+      }
+    },
+    {
       path: 'form',
       name: '表单页',
       meta: {
