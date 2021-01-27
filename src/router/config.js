@@ -73,6 +73,14 @@ const options = {
       }
     },
     {
+      path: 'warehouse',
+      name: '仓库管理',
+      component: () => import('@/pages/warehouse'),
+      meta: {
+        icon: 'form'
+      }
+    },
+    {
       path: 'form',
       name: '表单页',
       meta: {

@@ -18,6 +18,12 @@ module.exports = {
   // 评论管理
   COMMENT: `${BASE_URL}/api/getComment`,
   DELETE_COMMENT: `${BASE_URL}/admin/deleteComment`,
+  // 仓库管理
+  WAREHOUSE_LIST: `${BASE_URL}/api/getWarehouse`,
+  DELETE_WAREHOUSE: `${BASE_URL}/admin/deleteWarehouse`,
+  ADD_WAREHOUSE: `${BASE_URL}/admin/addWarehouse`,
+  UPDATE_WAREHOUSE: `${BASE_URL}/admin/updateWarehouse`,
+
   //
   ROUTES: `${BASE_URL}/routes`,
   GOODS: `${BASE_URL}/goods`,
