@@ -1,29 +1,27 @@
 <template>
-  <a-table
-    :columns="columns"
-    :data-source="data"
-    @expand="expand"
-    :expandedRowKeys="expandedRowKeys"
-    :rowKey="
+  <a-table :columns="columns"
+           :data-source="data"
+           @expand="expand"
+           :expandedRowKeys="expandedRowKeys"
+           :rowKey="
       (record, index) => {
         return record._id;
       }
-    "
-  >
-    <a slot="operation" slot-scope="record" @click="handleDelete(record)"
-      >删除</a
-    >
-    <a-table
-      slot="expandedRowRender"
-      :columns="childrenColumns"
-      :data-source="childrenData"
-      :rowKey="
+    ">
+    <a slot="operation"
+       slot-scope="record"
+       @click="handleDelete(record)">删除</a>
+    <a-table slot="expandedRowRender"
+             :columns="childrenColumns"
+             :data-source="childrenData"
+             :rowKey="
         (record, index) => {
           return record.id;
         }
-      "
-    >
-      <span slot="operation1" slot-scope="record" class="table-operation">
+      ">
+      <span slot="operation1"
+            slot-scope="record"
+            class="table-operation">
         <a @click="handleDelete(record)">删除</a>
       </span>
     </a-table>
@@ -60,7 +58,7 @@ const childrenColumns = [
 import { comment, deleteComment } from "@/services/comment";
 import moment from "dayjs";
 export default {
-  data() {
+  data () {
     return {
       data: [],
       childrenData: [],
@@ -69,11 +67,11 @@ export default {
       expandedRowKeys: [],
     };
   },
-  mounted() {
+  mounted () {
     this.getCommentList();
   },
   methods: {
-    expand(expanded, record) {
+    expand (expanded, record) {
       this.expandedRowKeys = []; // 收起全部节点，只展开当前点击的那个（无法做到同时几个内层表格数据直接缓存在childrenData）
       if (expanded) {
         this.childrenData = []; // 清空二级数据
@@ -85,7 +83,7 @@ export default {
         this.expandedRowKeys = [record._id]; // 展开当前点击
       }
     },
-    handleDelete(record) {
+    handleDelete (record) {
       let id = { _id: record._id, id: record.id };
       deleteComment(id).then((res) => {
         if (res.data.code === 200) {
@@ -101,7 +99,7 @@ export default {
         }
       });
     },
-    getCommentList() {
+    getCommentList () {
       comment().then((res) => {
         if (res.data.code === 200) {
           res.data.data.forEach((element) => {

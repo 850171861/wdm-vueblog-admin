@@ -23,6 +23,11 @@ module.exports = {
   DELETE_WAREHOUSE: `${BASE_URL}/admin/deleteWarehouse`,
   ADD_WAREHOUSE: `${BASE_URL}/admin/addWarehouse`,
   UPDATE_WAREHOUSE: `${BASE_URL}/admin/updateWarehouse`,
+  // 文章管理
+  ARTICLE_LIST: `${BASE_URL}/api/articlelist`,
+  DELETE_ARTICLE: `${BASE_URL}/admin/deleteARTICLE`,
+  ADD_ARTICLE: `${BASE_URL}/admin/addARTICLE`,
+  UPDATE_ARTICLE: `${BASE_URL}/admin/updateARTICLE`,
 
   //
   ROUTES: `${BASE_URL}/routes`,
