@@ -1,99 +1,97 @@
 <template>
   <div>
-    <a-button type="primary" style="margin: 5px 0" @click="handleCreate()">
+    <a-button type="primary"
+              style="margin: 5px 0"
+              @click="handleCreate()">
       <a-icon type="plus" /> 添加文章
     </a-button>
 
-    <a-table
-      :columns="columns"
-      :data-source="data"
-      :scroll="{ x: 1500, y: 450 }"
-      :rowKey="
+    <a-table :columns="columns"
+             :data-source="data"
+             :scroll="{ x: 1500, y: 450 }"
+             :rowKey="
         (record, index) => {
           return record._id;
         }
-      "
-    >
-      <template slot="tag" slot-scope="text, record">
+      ">
+      <template slot="tag"
+                slot-scope="text, record">
         <span v-if="data.length">
-          <a-tag v-for="(tag, i) in record.tag" :key="i">{{ tag }}</a-tag>
+          <a-tag v-for="(tag, i) in record.tag"
+                 :key="i">{{ tag }}</a-tag>
         </span>
       </template>
-      <template slot="status" slot-scope="text, record">
+      <template slot="status"
+                slot-scope="text, record">
         <span v-if="data.length">
-          <a href="javascript:;" v-if="record.status == 1">
-            <a-button
-              type="dashed"
-              style="
+          <a href="javascript:;"
+             v-if="record.status == 1">
+            <a-button type="dashed"
+                      style="
                 background-color: #e6f9f4;
                 border-color: #ccf3e9;
                 color: #00c292;
-              "
-            >
+              ">
               启用中
             </a-button>
           </a>
 
-          <a href="javascript:;" v-else>
-            <a-button
-              type="dashed"
-              style="
+          <a href="javascript:;"
+             v-else>
+            <a-button type="dashed"
+                      style="
                 background-color: #feeef0;
                 border-color: #fddce2;
                 color: #f4516c;
-              "
-            >
+              ">
               禁用中
             </a-button>
           </a>
         </span>
       </template>
-      <a slot="action" slot-scope="text, record">
-        <a-button
-          type="primary"
-          style="margin-right: 20px"
-          @click="handleUpdate(record)"
-        >
+      <a slot="action"
+         slot-scope="text, record">
+        <a-button type="primary"
+                  style="margin-right: 20px"
+                  @click="handleUpdate(record)">
           编辑
         </a-button>
-        <a-popconfirm
-          v-if="data.length"
-          title="确定要删除吗？"
-          @confirm="() => onDelete(record._id)"
-        >
+        <a-popconfirm v-if="data.length"
+                      title="确定要删除吗？"
+                      @confirm="() => onDelete(record._id)">
           <a-button type="danger"> 删除 </a-button>
         </a-popconfirm>
       </a>
     </a-table>
-    <a-drawer
-      title="Create a new account"
-      :width="980"
-      :visible="visible"
-      :body-style="{ paddingBottom: '80px' }"
-      @close="onClose"
-    >
-      <a-form layout="vertical" hide-required-mark>
+    <a-drawer title="Create a new account"
+              :width="980"
+              :visible="visible"
+              :body-style="{ paddingBottom: '80px' }"
+              @close="onClose">
+      <a-form layout="vertical"
+              hide-required-mark>
         <a-row :gutter="24">
           <a-col :span="24">
             <a-form-item label="文章标题">
-              <a-input placeholder="请输入文章标题" v-model="obj.title" />
+              <a-input placeholder="请输入文章标题"
+                       v-model="obj.title" />
             </a-form-item>
           </a-col>
         </a-row>
         <a-row :gutter="24">
           <a-col :span="5">
             <a-form-item label="封面图片">
-              <a-upload
-                name="file"
-                list-type="picture-card"
-                class="avatar-uploader"
-                :show-upload-list="false"
-                :headers="headers"
-                action="http://localhost:3000/admin/uploadImg"
-                :before-upload="beforeUpload"
-                @change="handleChange"
-              >
-                <img v-if="obj.img" :src="obj.img" alt="文章封面" />
+              <a-upload name="file"
+                        list-type="picture-card"
+                        class="avatar-uploader"
+                        :show-upload-list="false"
+                        :headers="headers"
+                        action="http://localhost:3000/admin/uploadImg"
+                        :before-upload="beforeUpload"
+                        @change="handleChange">
+                <img v-if="obj.img"
+                     :src="obj.img"
+                     alt="文章封面" />
                 <div v-else>
                   <a-icon :type="loading ? 'loading' : 'plus'" />
                   <div class="ant-upload-text">上传</div>
@@ -103,11 +101,9 @@
           </a-col>
           <a-col :span="19">
             <a-form-item label="文章描述">
-              <a-textarea
-                :rows="6"
-                v-model="obj.description"
-                placeholder="请输入文章描述"
-              />
+              <a-textarea :rows="6"
+                          v-model="obj.description"
+                          placeholder="请输入文章描述" />
             </a-form-item>
           </a-col>
         </a-row>
@@ -115,8 +111,10 @@
           <a-col :span="12">
             <a-form-item label="文章分类">
               <a-select v-model="obj.category">
-                <a-select-option disabled value="">请选择分类</a-select-option>
-                <a-select-option v-for="item in categoryData" :key="item.name">
+                <a-select-option disabled
+                                 value="">请选择分类</a-select-option>
+                <a-select-option v-for="item in categoryData"
+                                 :key="item.name">
                   {{ item.name }}
                 </a-select-option>
               </a-select>
@@ -124,13 +122,12 @@
           </a-col>
           <a-col :span="12">
             <a-form-item label="文章标签">
-              <a-select
-                mode="multiple"
-                style="width: 100%"
-                placeholder="请选择标签(支持多选)"
-                @change="handleTagChange"
-              >
-                <a-select-option v-for="item in tagData" :key="item.name">
+              <a-select mode="multiple"
+                        style="width: 100%"
+                        placeholder="请选择标签(支持多选)"
+                        @change="handleTagChange">
+                <a-select-option v-for="item in tagData"
+                                 :key="item.name">
                   {{ item.name }}
                 </a-select-option>
               </a-select>
@@ -140,13 +137,14 @@
         <a-row :gutter="24">
           <a-col :span="24">
             <div id="main">
-              <mavon-editor v-model="obj.content" @imgAdd="imgAdd" />
+              <mavon-editor v-model="obj.content"
+                            ref="md"
+                            @imgAdd="handleEditorImgAdd" />
             </div>
           </a-col>
         </a-row>
       </a-form>
-      <div
-        :style="{
+      <div :style="{
           position: 'absolute',
           right: 0,
           bottom: 0,
@@ -156,23 +154,19 @@
           background: '#fff',
           textAlign: 'right',
           zIndex: 1,
-        }"
-      >
-        <a-switch
-          defaultChecked
-          checkedChildren="发布"
-          unCheckedChildren="草稿"
-          v-model="checked"
-          @change="onChange"
-        />
+        }">
+        <a-switch defaultChecked
+                  checkedChildren="发布"
+                  unCheckedChildren="草稿"
+                  v-model="checked"
+                  @change="onChange" />
 
-        <a-button :style="{ marginRight: '8px' }" @click="onClose">
+        <a-button :style="{ marginRight: '8px' }"
+                  @click="onClose">
           取消
         </a-button>
-        <a-button
-          type="primary"
-          @click="dialogStatus === 'create' ? createData() : updateData()"
-        >
+        <a-button type="primary"
+                  @click="dialogStatus === 'create' ? createData() : updateData()">
           确认
         </a-button>
       </div>
@@ -219,13 +213,14 @@ import {
   deleteArticle,
   addArticle,
   updateArticle,
+  uploadImg
 } from "@/services/article";
 import { category } from "@/services/category";
 import { tag } from "@/services/tag";
 import Cookie from "js-cookie";
 
 export default {
-  data() {
+  data () {
     return {
       headers: {
         Authorization: "",
@@ -252,30 +247,37 @@ export default {
       dialogStatus: "",
     };
   },
-  mounted() {
+  mounted () {
     this.headers.Authorization = Cookie.get("Authorization");
     this.getPageData();
   },
   methods: {
-    imgAdd() {
-      console.log(2);
+    handleEditorImgAdd (pos, file) {
+      let formdata = new FormData()
+      formdata.append('file', file)
+      uploadImg(formdata).then(res => {
+        if (res.data.code === 200) {
+          let url = "http://localhost:3000" + res.data.data
+          this.$refs.md.$img2Url(pos, url)
+        }
+      })
     },
     // switch按钮
-    onChange() {
+    onChange () {
       this.checked == true ? (this.obj.status = 1) : (this.obj.status = 0);
     },
-    showDrawer() {
+    showDrawer () {
       this.visible = true;
     },
     // 添加或者编辑页是否取消
-    onClose() {
+    onClose () {
       this.visible = false;
     },
-    handleCreate() {
+    handleCreate () {
       this.dialogStatus = "create"; //dialogStatus为create调用createData()
       this.visible = true; //弹出
     },
-    createData() {
+    createData () {
       addArticle(this.obj).then((res) => {
         if (res.data.code === 200) {
           let data = res.data.data;
@@ -293,7 +295,7 @@ export default {
       this.visible = false; //关闭对话框
     },
 
-    handleUpdate(row) {
+    handleUpdate (row) {
       //处理修改
       this.obj = Object.assign({}, row); //复制当前编辑对象
       this.obj.status == 1 ? (this.checked = true) : (this.checked = false); //如果当前状态是启用中则开关-开启
@@ -301,7 +303,7 @@ export default {
       this.visible = true; //弹出
     },
     // 发送修改数据
-    updateData() {
+    updateData () {
       updateArticle(this.obj).then((res) => {
         if (res.data.code === 200) {
           this.$message.success("修改数据成功"); // 提示是否成功
@@ -323,11 +325,11 @@ export default {
       });
     },
     // 处理标签多选
-    handleTagChange(value) {
+    handleTagChange (value) {
       this.obj.tag = value;
     },
     // 获取页面的中数据
-    getPageData() {
+    getPageData () {
       // 获取文章数量
       article().then((res) => {
         if (res.data.code === 200) {
@@ -350,7 +352,7 @@ export default {
       });
     },
     // 删除文章数据
-    onDelete(_id) {
+    onDelete (_id) {
       deleteArticle({ _id: _id }).then((res) => {
         if (res.data.code === 200) {
           const data = [...this.data];
@@ -360,7 +362,7 @@ export default {
       });
     },
     // 判断上传类型是不是图片，并且上传图片不能大于2MB，
-    beforeUpload(file) {
+    beforeUpload (file) {
       const isJpgOrPng =
         file.type === "image/jpeg" || file.type === "image/png";
       if (!isJpgOrPng) {
@@ -373,7 +375,7 @@ export default {
       return isJpgOrPng && isLt2M;
     },
     // 上传 未完成时进行懒加载
-    handleChange(info) {
+    handleChange (info) {
       if (info.file.status === "uploading") {
         this.loading = true;
         return;

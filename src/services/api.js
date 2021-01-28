@@ -28,6 +28,8 @@ module.exports = {
   DELETE_ARTICLE: `${BASE_URL}/admin/deleteARTICLE`,
   ADD_ARTICLE: `${BASE_URL}/admin/addARTICLE`,
   UPDATE_ARTICLE: `${BASE_URL}/admin/updateARTICLE`,
+  // 
+  UPLOAD_IMG: `${BASE_URL}/admin/uploadImg`,
 
   //
   ROUTES: `${BASE_URL}/routes`,
