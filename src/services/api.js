@@ -28,9 +28,11 @@ module.exports = {
   DELETE_ARTICLE: `${BASE_URL}/admin/deleteARTICLE`,
   ADD_ARTICLE: `${BASE_URL}/admin/addARTICLE`,
   UPDATE_ARTICLE: `${BASE_URL}/admin/updateARTICLE`,
-  // 
+  // 图片上传
   UPLOAD_IMG: `${BASE_URL}/admin/uploadImg`,
-
+  // 错误日志
+  ERROR_LOG: `${BASE_URL}/admin/getErrorLog`,
+  DELETE_ERRORLOG: `${BASE_URL}/admin/deleteErrorLog`,
   //
   ROUTES: `${BASE_URL}/routes`,
   GOODS: `${BASE_URL}/goods`,
