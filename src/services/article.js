@@ -11,8 +11,8 @@ import {
 } from '@/utils/request'
 
 // 获取文章数据
-export async function article() {
-  return request(ARTICLE_LIST, METHOD.GET)
+export async function article(data) {
+  return request(ARTICLE_LIST, METHOD.GET, data)
 }
 // 删除文章数据
 export async function deleteArticle(data) {
