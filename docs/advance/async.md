@@ -66,22 +66,9 @@ const routerMap = {
     renderMenu: false,
     component: () => import('@/pages/demo')
   },
-  exp403: {
-    authority: '*',
-    name: 'exp403',
-    path: '403',
-    component: () => import('@/pages/exception/403')
-  },
-  exp404: {
-    name: 'exp404',
-    path: '404',
-    component: () => import('@/pages/exception/404')
-  },
-  exp500: {
-    name: 'exp500',
-    path: '500',
-    component: () => import('@/pages/exception/500')
-  },
+
+
+ 
   root: {
     path: '/',
     name: '首页',

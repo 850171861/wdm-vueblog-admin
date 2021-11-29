@@ -55,87 +55,11 @@ const routerMap = {
     icon: 'table',
     component: view.page
   },
-  queryList: {
-    path: 'query',
-    name: '查询表格',
-    component: () => import('@/pages/list/QueryList')
-  },
-  primaryList: {
-    path: 'primary',
-    name: '标准列表',
-    component: () => import('@/pages/list/StandardList')
-  },
-  cardList: {
-    path: 'card',
-    name: '卡片列表',
-    component: () => import('@/pages/list/CardList')
-  },
-  searchList: {
-    path: 'search',
-    name: '搜索列表',
-    component: () => import('@/pages/list/search/SearchLayout')
-  },
-  article: {
-    name: '文章',
-    component: () => import('@/pages/list/search/ArticleList')
-  },
-  application: {
-    name: '应用',
-    component: () => import('@/pages/list/search/ApplicationList')
-  },
-  project: {
-    name: '项目',
-    component: () => import('@/pages/list/search/ProjectList')
-  },
-  details: {
-    name: '详情页',
-    icon: 'profile',
-    component: view.blank
-  },
-  basicDetails: {
-    path: 'basic',
-    name: '基础详情页',
-    component: () => import('@/pages/detail/BasicDetail')
-  },
-  advanceDetails: {
-    path: 'advance',
-    name: '高级详情页',
-    component: () => import('@/pages/detail/AdvancedDetail')
-  },
-  result: {
-    name: '结果页',
-    icon: 'check-circle-o',
-    component: view.page
-  },
-  success: {
-    name: '成功',
-    component: () => import('@/pages/result/Success')
-  },
-  error: {
-    name: '失败',
-    component: () => import('@/pages/result/Error')
-  },
-  exception: {
-    name: '异常页',
-    icon: 'warning',
-    component: view.blank
-  },
-  exp403: {
-    authority: '*',
-    name: 'exp403',
-    path: '403',
-    component: () => import('@/pages/exception/403')
-  },
-  exp404: {
-    name: 'exp404',
-    path: '404',
-    component: () => import('@/pages/exception/404')
-  },
-  exp500: {
-    name: 'exp500',
-    path: '500',
-    component: () => import('@/pages/exception/500')
-  },
+
+  
+ 
+  
+  
   components: {
     name: '小组件',
     icon: 'appstore-o',

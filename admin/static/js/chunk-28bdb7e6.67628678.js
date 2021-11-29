@@ -1,4 +1,4 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-37119654"],{"21cb":function(t,e,n){"use strict";n("474d")},2480:function(t,e,n){"use strict";
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-28bdb7e6"],{"21cb":function(t,e,n){"use strict";n("474d")},2480:function(t,e,n){"use strict";
 /**!
  * Sortable 1.10.2
  * @author	RubaXa   <trash@rubaxa.org>
