@@ -88,7 +88,7 @@
                         class="avatar-uploader"
                         :show-upload-list="false"
                         :headers="headers"
-                        action="http://localhost:3000/admin/uploadImg"
+                        action="https://wudongming.com/admin/uploadImg"
                         :before-upload="beforeUpload"
                         @change="handleChange">
                 <img v-if="obj.img"
@@ -270,7 +270,7 @@ export default {
       formdata.append("file", file);
       uploadImg(formdata).then((res) => {
         if (res.data.code === 200) {
-          let url = "http://localhost:3000" + res.data.data;
+          let url = "https://wudongming.com" + res.data.data;
           this.$refs.md.$img2Url(pos, url);
         }
       });
@@ -405,7 +405,7 @@ export default {
       }
       // 上传完毕图片路径赋值，取消懒加载
       if (info.file.status === "done") {
-        this.obj.img = "http://localhost:3000" + info.file.response.data;
+        this.obj.img = "https://wudongming.com" + info.file.response.data;
         this.loading = false;
       }
     },
